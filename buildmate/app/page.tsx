@@ -1,69 +1,58 @@
-import Image from "next/image";
+import { MarketingShell } from "@/components/layout/marketing-shell";
+import { FeatureInput } from "@/components/features/design-workspace";
+import { playfulFont } from "@/lib/playful-font";
+
+const steps = [
+  { number: "01", title: "기능을 말해 주세요", text: "생각 중인 기능을 한 문장으로 적으세요.", tone: "bg-[#eeedff] text-[#696bd7]" },
+  { number: "02", title: "조건을 고르세요", text: "AI가 놓치기 쉬운 규칙과 예외를 펼쳐 줍니다.", tone: "bg-[#e8f5ee] text-[#4c866b]" },
+  { number: "03", title: "API로 옮기세요", text: "선택한 결정이 요청·응답·오류 명세가 됩니다.", tone: "bg-[#fff0df] text-[#a47543]" },
+];
+
+const decisions = [
+  { icon: "01", title: "비즈니스 규칙", text: "발급 횟수, 만료일, 중복 사용처럼 기능의 행동을 결정하는 조건" },
+  { icon: "02", title: "권한과 상태", text: "누가 요청할 수 있고, 어떤 상태에서 다음 상태로 바뀌는지" },
+  { icon: "03", title: "예외와 오류", text: "이미 사용된 쿠폰, 동시 요청, 주문 취소처럼 놓치기 쉬운 상황" },
+];
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+  return <MarketingShell><div className="mx-auto max-w-[1200px]">
+    <section className="grid grid-cols-[minmax(0,1.1fr)_minmax(300px,.9fr)] items-center gap-[clamp(35px,6vw,90px)] pt-[82px] pb-[88px] max-[950px]:gap-8 max-[700px]:grid-cols-1 max-[700px]:pt-12 max-[700px]:pb-14">
+      <div><div className="inline-flex items-center gap-[9px] rounded-full bg-[#eeedff] px-4 py-2 text-xs font-bold text-[#696bd7]"><span className="size-[7px] rounded-full bg-[#6d70df] shadow-[0_0_0_4px_#e3e9ff]" /> 개발을 시작하기 전, 먼저 설계하기</div>
+        <h1 className={`${playfulFont.className} mt-[18px] mb-[20px] text-[clamp(43px,4.7vw,68px)] leading-[1.16] tracking-[-.025em] break-keep max-sm:text-[42px] max-[420px]:text-[38px]`}>떠오른 기능을<br /><em className="inline-block -rotate-2 rounded-[30px] bg-[#eeedff] px-3 py-1 not-italic text-[#696bd7] max-[420px]:px-2">구현 가능한 <span className="max-[420px]:block">설계로.</span></em></h1>
+        <p className="max-w-[560px] text-[15px] leading-[1.85] tracking-[-.015em] text-[#697389] break-keep">“쿠폰 기능” 한마디부터 시작해도 좋아요. BuildMate가 필요한 정책과 예외를 질문하고, 당신의 선택을 API 명세로 정리합니다.</p>
+        <div className="mt-8 flex flex-wrap items-center gap-3"><a href="#start" className="inline-flex items-center gap-8 rounded-full bg-[#6d70df] px-6 py-[15px] text-sm font-extrabold text-white shadow-[0_12px_22px_#6d70df29] transition hover:-translate-y-0.5 hover:bg-[#5e61cb]">기능 분석 시작하기 <span>↗</span></a><a href="#how" className="rounded-full border border-[#e8e5ef] bg-white px-5 py-[15px] text-sm font-bold text-[#4c5a73] transition hover:border-[#9fb2ec]">작동 방식 보기</a></div>
+      </div>
+      <div className="relative mx-auto h-[420px] w-full max-w-[490px] max-[700px]:h-[400px]" aria-hidden="true">
+        <div className="absolute inset-x-10 inset-y-8 -rotate-6 rounded-[48px] bg-[#eeedff] max-[700px]:inset-x-7" />
+        <div className="absolute top-5 left-1 z-20 -rotate-3 rounded-full border border-[#eceafa] bg-white px-5 py-3 text-xs font-bold text-[#4b4f68] shadow-[0_12px_30px_#5859a520] max-[700px]:top-2">
+          <span className="mr-2 text-[#797bda]">✦</span> 쿠폰 기능 만들고 싶어
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="absolute top-[82px] right-1 bottom-[48px] left-4 rounded-[32px] border border-[#e9e7f8] bg-white p-6 shadow-[0_25px_55px_#555aa526] max-[700px]:top-[68px] max-[700px]:right-1 max-[700px]:bottom-[34px] max-[700px]:left-1 max-[700px]:p-5">
+          <div className="flex items-center justify-between gap-3">
+            <span className="flex items-center gap-2 whitespace-nowrap text-[11px] font-extrabold tracking-[-.01em] text-[#77799b]"><span className="grid size-7 place-items-center rounded-[10px] bg-[#eeedff] text-base text-[#696bd7]">✳</span> 고려할 조건</span>
+            <span className="shrink-0 rounded-full bg-[#fff0df] px-2.5 py-1 text-[10px] font-bold whitespace-nowrap text-[#a47543]">3개 발견</span>
+          </div>
+          <div className="mt-5 flex items-center justify-between border-b border-[#f0eff6] pb-4">
+            <strong className={`${playfulFont.className} text-[27px] leading-none text-[#343950]`}>쿠폰 기능</strong>
+            <span className="text-[11px] font-semibold text-[#9a9eb0]">요구사항 분석</span>
+          </div>
+          <div className="mt-4 grid gap-2.5">
+            <div className="flex items-center gap-3 rounded-2xl bg-[#f6f5ff] px-3.5 py-2.5 text-[12px] font-bold text-[#4b4f68]"><span className="grid size-5 shrink-0 place-items-center rounded-full bg-[#6d70df] text-[11px] text-white">✓</span> 사용자당 발급 횟수 제한</div>
+            <div className="flex items-center gap-3 rounded-2xl bg-[#f6f5ff] px-3.5 py-2.5 text-[12px] font-bold text-[#4b4f68]"><span className="grid size-5 shrink-0 place-items-center rounded-full bg-[#6d70df] text-[11px] text-white">✓</span> 사용 후 재사용 불가</div>
+            <div className="flex items-center gap-3 rounded-2xl border border-dashed border-[#dcd9f1] px-3.5 py-2.5 text-[12px] font-bold text-[#7a7d93]"><span className="size-5 shrink-0 rounded-full border-2 border-[#c9c7da]" /> 주문 취소 시 쿠폰 복구?</div>
+          </div>
         </div>
-      </main>
-    </div>
-  );
+        <div className="absolute right-0 bottom-4 z-10 rotate-3 rounded-2xl bg-[#6d70df] px-4 py-3 font-mono text-[11px] font-bold text-white shadow-[0_12px_26px_#6d70df38] max-[700px]:right-1 max-[700px]:bottom-1">POST <span className="text-[#dcd9ff]">/api/coupons</span> ↗</div>
+      </div>
+    </section>
+    <section className="scroll-mt-24 rounded-[36px] bg-[#f2f0ff] px-[clamp(22px,4vw,48px)] py-[clamp(28px,4vw,48px)]" id="start"><div><span className="font-mono text-[10px] font-extrabold tracking-[.16em] text-[#778299]">직접 해보기</span><h2 className={`${playfulFont.className} mt-3 mb-[5px] text-[clamp(28px,2.8vw,39px)]`}>어떤 기능을 만들고 싶나요?</h2><p className="text-[13px] tracking-[-.01em] text-[#687287]">대략적인 아이디어만 적어도 됩니다. 조건은 함께 구체화할게요.</p></div><FeatureInput /></section>
+    <section id="how" className="mt-[96px] scroll-mt-28 grid grid-cols-[235px_1fr] gap-8 max-[950px]:grid-cols-1 max-sm:mt-[46px]"><div><span className="font-mono text-[10px] font-extrabold tracking-[.16em] text-[#778299]">사용 방법</span><h2 className={`${playfulFont.className} mt-[11px] text-3xl leading-[1.25]`}>막연함에서<br />명확함까지.</h2></div><div className="grid grid-cols-3 gap-3 max-sm:grid-cols-1">{steps.map(step => <div key={step.number} className="rounded-[28px] border border-[#eeebf2] bg-white px-[21px] py-[25px] shadow-[0_8px_24px_#30314b08] transition duration-200 hover:-translate-y-1 hover:shadow-[0_14px_30px_#6d70df12] max-sm:px-[17px] max-sm:py-[15px]"><span className={`grid size-10 place-items-center rounded-[15px] font-mono text-[11px] font-extrabold ${step.tone}`}>{step.number}</span><h3 className="mt-[18px] text-sm font-extrabold max-sm:mt-[6px]">{step.title}</h3><p className="mt-[7px] text-xs leading-[1.6] text-[#687287]">{step.text}</p></div>)}</div></section>
+    <section id="showcase" className="mt-[110px] scroll-mt-28 grid grid-cols-[minmax(0,.85fr)_minmax(420px,1.15fr)] items-center gap-[clamp(30px,5vw,76px)] border-t border-[#dce2ec] pt-[69px] pb-[78px] max-[1050px]:grid-cols-1 max-[1050px]:gap-10 max-[700px]:mt-[65px] max-[700px]:pt-[45px] max-[700px]:pb-[65px]" aria-labelledby="showcase-title">
+      <div><span className="font-mono text-[10px] font-extrabold tracking-[.16em] text-[#778299]">놓치기 쉬운 것들</span><h2 className={`${playfulFont.className} mt-[15px] text-[clamp(34px,3.5vw,50px)] leading-[1.25] break-keep max-[700px]:text-[34px]`} id="showcase-title">놓친 조건은,<br /><span className="text-[#696bd7]">나중에 버그가 됩니다.</span></h2><p className="mt-[18px] max-w-[450px] text-sm leading-[1.85] text-[#687287] break-keep">기능 이름은 쉽게 떠오르지만 실제 구현을 결정하는 질문은 뒤늦게 나타납니다. BuildMate는 코드를 쓰기 전에 그 질문들을 화면에 꺼내 놓습니다.</p><div className="mt-[35px] border-t border-[#dce2ec]">{decisions.map(item => <div className="grid grid-cols-[34px_1fr] gap-3 border-b border-[#dce2ec] py-4" key={item.icon}><span className="grid size-8 place-items-center rounded-[12px] bg-[#eeedff] font-mono text-[10px] font-extrabold text-[#696bd7]">{item.icon}</span><div><h3 className="text-sm font-extrabold tracking-[-.025em]">{item.title}</h3><p className="mt-[5px] text-xs leading-[1.65] text-[#687287] break-keep">{item.text}</p></div></div>)}</div></div>
+      <div className="relative overflow-hidden rounded-[32px] border border-[#e8e4f3] bg-white shadow-[0_24px_52px_#6d70df14] max-[1050px]:max-w-[610px]" aria-label="쿠폰 기능 요구사항 분석 예시"><div className="flex h-[43px] items-center gap-2 border-b border-[#e8e4f3] bg-[#f5f3ff] px-[22px] font-mono text-[10px] font-extrabold tracking-[.08em] text-[#7180a5]"><span className="size-[7px] rounded-full bg-[#6d70df] shadow-[0_0_0_3px_#dce4ff]" /> EXAMPLE / 쿠폰 기능 <span className="ml-auto text-lg text-[#696bd7]">✳</span></div><div className="border-b border-[#e8edf6] px-[30px] pt-[26px] pb-6"><span className="font-mono text-[10px] font-extrabold tracking-[.13em] text-[#8b99b3]">BUILD QUESTION</span><h3 className="mt-[7px] text-[21px] font-extrabold tracking-[-.04em]">쿠폰 기능을 만들고 싶어</h3><p className="mt-[5px] text-xs text-[#687287]">구현 전에 먼저 결정할 조건</p></div><div className="px-[30px] pt-[17px] pb-[3px]"><div className="mb-[9px] flex items-center gap-[10px] text-[13px] font-extrabold text-[#293954]"><span className="font-mono text-[10px] text-[#696bd7]">01</span> 발급 정책</div><div className="mb-[5px] flex items-center gap-[10px] rounded-2xl border border-[#e8edf5] px-[11px] py-2 text-xs font-semibold text-[#42506a] has-[.checked]:border-[#e3e9ff] has-[.checked]:bg-[#f8faff]"><span className="checked grid size-[17px] shrink-0 place-items-center rounded border border-[#6d70df] bg-[#6d70df] text-[11px] text-white">✓</span> 사용자당 1회 발급 <small className="ml-auto rounded-full bg-[#eeedff] px-[5px] py-[2px] text-[9px] font-extrabold text-[#696bd7]">추천</small></div><div className="mb-[5px] flex items-center gap-[10px] rounded-2xl border border-[#e8edf5] px-[11px] py-2 text-xs font-semibold text-[#42506a] has-[.checked]:border-[#e3e9ff] has-[.checked]:bg-[#f8faff]"><span className="size-[17px] shrink-0 rounded border border-[#bcc8dd]" /> 전체 발급 수량 제한</div></div><div className="px-[30px] pt-[17px] pb-[3px]"><div className="mb-[9px] flex items-center gap-[10px] text-[13px] font-extrabold text-[#293954]"><span className="font-mono text-[10px] text-[#696bd7]">02</span> 사용 정책</div><div className="mb-[5px] flex items-center gap-[10px] rounded-2xl border border-[#e8edf5] px-[11px] py-2 text-xs font-semibold text-[#42506a] has-[.checked]:border-[#e3e9ff] has-[.checked]:bg-[#f8faff]"><span className="checked grid size-[17px] shrink-0 place-items-center rounded border border-[#6d70df] bg-[#6d70df] text-[11px] text-white">✓</span> 중복 사용 불가 <small className="ml-auto rounded-full bg-[#eeedff] px-[5px] py-[2px] text-[9px] font-extrabold text-[#696bd7]">추천</small></div><div className="mb-[5px] flex items-center gap-[10px] rounded-2xl border border-[#e8edf5] px-[11px] py-2 text-xs font-semibold text-[#42506a] has-[.checked]:border-[#e3e9ff] has-[.checked]:bg-[#f8faff]"><span className="checked grid size-[17px] shrink-0 place-items-center rounded border border-[#6d70df] bg-[#6d70df] text-[11px] text-white">✓</span> 만료 후 사용 불가</div></div><div className="mx-[30px] mt-5 mb-[27px] flex items-center justify-between gap-[15px] border-t border-[#e8edf6] pt-4 text-[11px] text-[#8794aa]"><span>조건을 선택하면</span><strong className="rounded-full bg-[#6d70df] px-4 py-[9px] text-[11px] text-white">API 명세 생성 →</strong></div></div>
+    </section>
+    <section id="output" className="mt-[37px] scroll-mt-28 rounded-[36px] bg-[#eeedff] px-[52px] pt-[65px] pb-[55px] max-[1050px]:px-9 max-[1050px]:py-12 max-[700px]:mt-4 max-[700px]:px-5 max-[700px]:pt-[38px] max-[700px]:pb-[30px]" aria-labelledby="output-title"><div className="flex items-end justify-between gap-[35px] max-[700px]:block"><div><span className="font-mono text-[10px] font-extrabold tracking-[.16em] text-[#778299]">완성되는 결과</span><h2 id="output-title" className={`${playfulFont.className} mt-[15px] text-[clamp(34px,3.5vw,50px)] leading-[1.25] break-keep max-[700px]:text-[34px]`}>선택한 결정이<br />실제 API 설계로 이어집니다.</h2></div><p className="mb-[6px] max-w-[320px] text-[13px] leading-[1.8] text-[#62718d] break-keep max-[700px]:mt-[14px]">엔드포인트만 나열하지 않습니다. 인증과 권한, 검증 조건, 요청·응답 예시, 오류 코드까지 한 흐름으로 정리합니다.</p></div><div className="mt-[31px] overflow-hidden rounded-[28px] border border-[#e8e4f3] bg-white shadow-[0_18px_42px_#6d70df14]"><div className="flex h-[43px] items-center gap-[11px] border-b border-[#e8edf7] px-[18px] font-mono text-[10px] font-extrabold tracking-[.06em] text-[#8694ad]"><span className="flex gap-[5px]"><i className="size-[6px] rounded-full bg-[#b9c5dc]" /><i className="size-[6px] rounded-full bg-[#b9c5dc]" /><i className="size-[6px] rounded-full bg-[#b9c5dc]" /></span><span>API SPECIFICATION / EXAMPLE</span><span className="ml-auto text-[#696bd7]">JSON ↗</span></div><div className="px-[35px] pt-[29px] pb-[30px] max-[700px]:p-5"><div className="flex items-center gap-[13px] border-b border-[#e8edf7] pb-[23px] max-[700px]:flex-wrap max-[700px]:items-start max-[700px]:gap-[9px]"><span className="rounded-full bg-[#eeedff] px-[12px] py-[7px] font-mono text-[11px] font-extrabold text-[#696bd7]">POST</span><code className="font-mono text-[clamp(13px,1.4vw,18px)] font-extrabold break-all text-[#26354e]">/api/coupons/&#123;couponId&#125;/use</code><small className="ml-auto whitespace-nowrap text-[#8390a5] max-[700px]:ml-0 max-[700px]:w-full">쿠폰 사용</small></div><div className="grid grid-cols-[1fr_1.4fr] gap-[45px] pt-6 max-[700px]:grid-cols-1 max-[700px]:gap-1"><div className="border-r border-[#e8edf7] max-[700px]:mb-4 max-[700px]:border-r-0 max-[700px]:border-b"><span className="font-mono text-[10px] font-extrabold tracking-[.08em] text-[#8b98b0]">AUTHENTICATION</span><p className="mt-[6px] mb-5 text-xs leading-[1.75] text-[#44516a]">Required</p><span className="font-mono text-[10px] font-extrabold tracking-[.08em] text-[#8b98b0]">AUTHORIZATION</span><p className="mt-[6px] mb-5 text-xs leading-[1.75] text-[#44516a]">쿠폰 소유자</p></div><div><span className="font-mono text-[10px] font-extrabold tracking-[.08em] text-[#8b98b0]">VALIDATION</span><p className="mt-[6px] mb-5 text-xs leading-[1.75] text-[#44516a]">ACTIVE 상태 · 만료 전 · 최소 주문금액 충족</p><span className="font-mono text-[10px] font-extrabold tracking-[.08em] text-[#8b98b0]">ERRORS</span><p className="mt-[6px] mb-5 text-xs leading-[1.75] text-[#44516a]"><code className="font-mono font-extrabold text-[#d45261]">400</code> COUPON_EXPIRED<br /><code className="font-mono font-extrabold text-[#d45261]">409</code> COUPON_ALREADY_USED<br /><code className="font-mono font-extrabold text-[#d45261]">403</code> COUPON_NOT_OWNED</p></div></div></div></div><p className="mt-4 text-[11px] leading-[1.6] text-[#7b89a5]">* 위 화면은 결과 형식을 보여 주는 예시입니다. 실제 명세는 선택한 요구사항에 따라 생성됩니다.</p></section>
+    <section id="faq" className="mt-[100px] scroll-mt-28 border-t border-[#dce2ec] pt-12 max-sm:mt-16" aria-labelledby="faq-title"><div className="grid grid-cols-[.7fr_1.3fr] gap-12 max-[800px]:grid-cols-1 max-[800px]:gap-7"><div><span className="font-mono text-[10px] font-extrabold tracking-[.16em] text-[#778299]">자주 묻는 질문</span><h2 id="faq-title" className={`${playfulFont.className} mt-3 text-[clamp(32px,3.3vw,44px)] leading-[1.25]`}>시작하기 전에<br />궁금한 점.</h2><p className="mt-4 max-w-[330px] text-sm leading-[1.8] text-[#687287]">기능을 떠올렸다면, 나머지 결정은 BuildMate와 함께 정리할 수 있어요.</p></div><div className="divide-y divide-[#e0e6f0] border-y border-[#e0e6f0]">{[["얼마나 자세히 입력해야 하나요?", "‘예약 기능’처럼 짧게 입력해도 됩니다. 맥락을 더 적으면 요구사항 분석에 반영됩니다."], ["AI가 제안한 조건을 모두 선택해야 하나요?", "아니요. 필요한 조건만 직접 고르고, 선택지가 있는 정책은 세부 옵션을 결정할 수 있습니다."], ["생성한 설계를 다시 볼 수 있나요?", "로그인한 뒤 명세를 저장하면 ‘저장된 설계’에서 선택한 요구사항과 API 명세를 다시 볼 수 있습니다."]].map(([question, answer]) => <details key={question} className="group py-5"><summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-sm font-extrabold text-[#26354e] marker:hidden">{question}<span className="text-xl font-normal text-[#696bd7] transition group-open:rotate-45">＋</span></summary><p className="mt-3 pr-8 text-[13px] leading-[1.8] text-[#687287]">{answer}</p></details>)}</div></div></section>
+
+  </div></MarketingShell>;
 }
