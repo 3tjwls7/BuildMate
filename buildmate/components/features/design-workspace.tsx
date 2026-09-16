@@ -536,20 +536,49 @@ export function AuthLink() {
     const avatar = metadata.avatar_url || metadata.picture || metadata.profile_image_url;
     const name = metadata.full_name || metadata.name || metadata.user_name || user.email || "마이페이지";
     return (
-      <div className="flex items-center gap-2">
-        <Link href="/mypage" aria-label={`${name} 마이페이지`} className="group flex items-center gap-2 rounded-full bg-white py-1 pr-3 pl-1 text-[#42475c] shadow-[0_3px_12px_#30314b0b] ring-1 ring-[#e8e5ef] transition hover:ring-[#c9c6f5] max-sm:pr-1">
-          {avatar ? <img src={avatar} alt="" className="size-8 rounded-full object-cover" referrerPolicy="no-referrer" /> : <span className="grid size-8 place-items-center rounded-full bg-[#eeedff] font-extrabold text-[#696bd7]">{String(name).slice(0, 1).toUpperCase()}</span>}
-          <span className="max-w-24 truncate text-xs font-bold max-sm:hidden">마이페이지</span>
-        </Link>
-        <button
-          onClick={async () => {
-            await createClient().auth.signOut();
-            location.href = "/";
-          }}
-          className="rounded-full border border-[#e4e1e9] bg-white px-3.5 py-2 text-xs font-bold text-[#62687a] transition hover:border-[#c9c6f5] hover:text-[#696bd7]"
+      <div className="group relative">
+        <Link
+          href="/mypage"
+          aria-label={`${name} 프로필 메뉴`}
+          className="relative block rounded-full outline-none"
         >
-          로그아웃
-        </button>
+          {avatar ? (
+            <img
+              src={avatar}
+              alt=""
+              className="size-10 rounded-full object-cover shadow-[0_5px_16px_#30314b1a] ring-2 ring-white transition duration-200 group-hover:scale-105 group-hover:ring-[#c9c6f5] group-focus-within:ring-[#c9c6f5]"
+              referrerPolicy="no-referrer"
+            />
+          ) : (
+            <span className="grid size-10 place-items-center rounded-full bg-[#7779df] text-sm font-extrabold text-white shadow-[0_5px_16px_#6d70df2b] ring-2 ring-white transition duration-200 group-hover:scale-105 group-hover:ring-[#c9c6f5] group-focus-within:ring-[#c9c6f5]">
+              {String(name).trim().slice(0, 1).toUpperCase() || "B"}
+            </span>
+          )}
+          <span className="absolute right-0 bottom-0 size-2.5 rounded-full border-2 border-[#faf9f6] bg-[#68c58b]" aria-hidden="true" />
+        </Link>
+        <div className="invisible absolute top-full right-0 z-50 pt-3 opacity-0 transition duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+          <div className="w-48 overflow-hidden rounded-[20px] border border-[#e8e5ef] bg-white p-2 shadow-[0_18px_45px_#30314b1f]">
+            <div className="border-b border-[#f0edf3] px-3 py-2.5">
+              <p className="truncate text-xs font-extrabold text-[#343950]">{name}</p>
+              <p className="mt-0.5 truncate text-[10px] font-medium text-[#9298aa]">{user.email}</p>
+            </div>
+            <Link href="/mypage" className="mt-1 flex items-center gap-2 rounded-xl px-3 py-2.5 text-xs font-bold text-[#565c70] transition hover:bg-[#f2f0ff] hover:text-[#696bd7]">
+              <span aria-hidden="true">☺</span> 마이페이지
+            </Link>
+            <Link href="/projects" className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-xs font-bold text-[#565c70] transition hover:bg-[#f2f0ff] hover:text-[#696bd7]">
+              <span aria-hidden="true">▤</span> 저장된 설계
+            </Link>
+            <button
+              onClick={async () => {
+                await createClient().auth.signOut();
+                location.href = "/";
+              }}
+              className="flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-xs font-bold text-[#777d8f] transition hover:bg-[#fff1f1] hover:text-[#d45d68]"
+            >
+              <span aria-hidden="true">↪</span> 로그아웃
+            </button>
+          </div>
+        </div>
       </div>
     );
   }

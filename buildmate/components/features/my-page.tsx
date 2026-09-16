@@ -8,10 +8,17 @@ import { createClient } from "@/lib/supabase/client";
 
 function profile(user: User) {
   const metadata = user.user_metadata ?? {};
+  const provider = user.app_metadata?.provider;
   return {
     name: metadata.full_name || metadata.name || metadata.user_name || metadata.preferred_username || "BuildMate 사용자",
     avatar: metadata.avatar_url || metadata.picture || metadata.profile_image_url || null,
-    provider: user.app_metadata?.provider === "kakao" ? "Kakao" : user.app_metadata?.provider === "github" ? "GitHub" : "소셜 계정",
+    provider: provider === "kakao" ? "Kakao" : provider === "github" ? "GitHub" : "소셜 계정",
+    providerStyle:
+      provider === "kakao"
+        ? "bg-[#FEE500] text-[#191919]"
+        : provider === "github"
+          ? "bg-[#24292f] text-white"
+          : "bg-[#f2f0ff] text-[#696bd7]",
   };
 }
 
@@ -44,7 +51,10 @@ export function MyPage() {
               <span className="grid size-[76px] shrink-0 place-items-center rounded-[26px] bg-[#eeedff] text-3xl font-extrabold text-[#696bd7]">{info.name.slice(0, 1).toUpperCase()}</span>
             )}
             <div className="min-w-0">
-              <span className="inline-flex rounded-full bg-[#f2f0ff] px-3 py-1 text-[10px] font-extrabold text-[#696bd7]">{info.provider}로 연결됨</span>
+              <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] font-extrabold ${info.providerStyle}`}>
+                <span className="size-1.5 rounded-full bg-current opacity-70" aria-hidden="true" />
+                {info.provider}로 연결됨
+              </span>
               <h2 className="mt-3 truncate text-2xl font-extrabold tracking-[-.04em] text-[#30344a]">{info.name}</h2>
               <p className="mt-1 truncate text-sm text-[#7b8194]">{user.email || "이메일 정보 없음"}</p>
             </div>
