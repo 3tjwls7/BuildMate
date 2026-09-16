@@ -42,6 +42,13 @@ export function AppShell({ children }: { children: ReactNode }) {
                 <span className="w-5 text-center text-[19px] leading-none">▤</span>저장된 설계
                 <span className={`ml-auto ${path.startsWith("/projects") ? "opacity-100" : "opacity-0"}`}>↗</span>
               </Link>
+              <Link
+                href="/mypage"
+                className={`flex items-center gap-3 rounded-full px-[14px] py-[13px] text-[13px] font-bold no-underline transition hover:bg-[#eeedff] ${path.startsWith("/mypage") ? "bg-[#eeedff] text-[#696bd7]" : "text-[#656b7d]"}`}
+              >
+                <span className="w-5 text-center text-[18px] leading-none">☺</span>마이페이지
+                <span className={`ml-auto ${path.startsWith("/mypage") ? "opacity-100" : "opacity-0"}`}>↗</span>
+              </Link>
             </nav>
           </div>
           <div className="relative mt-auto min-h-[190px] overflow-hidden rounded-[28px] bg-[#eeedff] px-5 py-[23px] text-[#333855]">

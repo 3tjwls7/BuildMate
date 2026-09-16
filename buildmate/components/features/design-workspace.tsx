@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/primitives";
 import { createClient } from "@/lib/supabase/client";
 import { playfulFont } from "@/lib/playful-font";
+import type { User } from "@supabase/supabase-js";
 import {
   draftKey,
   type Analysis,
@@ -521,29 +522,41 @@ export function Projects() {
 }
 
 export function AuthLink() {
-  const [email, setEmail] = useState<string | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
     const db = createClient();
-    db.auth.getUser().then(({ data }) => setEmail(data.user?.email || null));
+    db.auth.getUser().then(({ data }) => setUser(data.user));
     const { data: listener } = db.auth.onAuthStateChange((_event, session) =>
-      setEmail(session?.user.email || null),
+      setUser(session?.user || null),
     );
     return () => listener.subscription.unsubscribe();
   }, []);
-  return email ? (
-    <button
-      onClick={async () => {
-        await createClient().auth.signOut();
-        location.href = "/";
-      }}
-      className="rounded-2xl border border-[#ccd5e8] bg-white px-3 py-1.5 text-[#171e31]"
-    >
-      로그아웃
-    </button>
-  ) : (
+  if (user) {
+    const metadata = user.user_metadata ?? {};
+    const avatar = metadata.avatar_url || metadata.picture || metadata.profile_image_url;
+    const name = metadata.full_name || metadata.name || metadata.user_name || user.email || "마이페이지";
+    return (
+      <div className="flex items-center gap-2">
+        <Link href="/mypage" aria-label={`${name} 마이페이지`} className="group flex items-center gap-2 rounded-full bg-white py-1 pr-3 pl-1 text-[#42475c] shadow-[0_3px_12px_#30314b0b] ring-1 ring-[#e8e5ef] transition hover:ring-[#c9c6f5] max-sm:pr-1">
+          {avatar ? <img src={avatar} alt="" className="size-8 rounded-full object-cover" referrerPolicy="no-referrer" /> : <span className="grid size-8 place-items-center rounded-full bg-[#eeedff] font-extrabold text-[#696bd7]">{String(name).slice(0, 1).toUpperCase()}</span>}
+          <span className="max-w-24 truncate text-xs font-bold max-sm:hidden">마이페이지</span>
+        </Link>
+        <button
+          onClick={async () => {
+            await createClient().auth.signOut();
+            location.href = "/";
+          }}
+          className="rounded-full border border-[#e4e1e9] bg-white px-3.5 py-2 text-xs font-bold text-[#62687a] transition hover:border-[#c9c6f5] hover:text-[#696bd7]"
+        >
+          로그아웃
+        </button>
+      </div>
+    );
+  }
+  return (
     <Link
       href="/login"
-      className="rounded-2xl border border-[#ccd5e8] bg-white px-3 py-1.5 text-[#171e31]"
+      className="rounded-full border border-[#ccd5e8] bg-white px-3.5 py-2 text-[#171e31]"
     >
       로그인
     </Link>
